@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<meta name="theme-color" content="#e11d48"/>
+<title>🏪 Pago OXXO — Casino Solidario</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'DM Sans',sans-serif;background:#0b0d14;color:#e2e8f0;min-height:100vh;}
+.page{max-width:480px;margin:0 auto;padding:0 0 48px;}
+
+.topbar{background:linear-gradient(135deg,#1a0008,#2d0010);border-bottom:2px solid rgba(225,29,72,.4);padding:14px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;}
+.back-btn{background:rgba(225,29,72,.15);border:1px solid rgba(225,29,72,.35);color:#fda4af;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;text-decoration:none;font-family:'DM Sans',sans-serif;}
+.topbar-title{font-size:15px;font-weight:800;color:#fff;}
+.topbar-sub{font-size:10px;color:#fda4af;margin-top:1px;}
+
+.hero{background:linear-gradient(135deg,#1a0008,#2d0010);padding:24px 16px 20px;text-align:center;border-bottom:1px solid rgba(225,29,72,.2);}
+.oxxo-logo{font-size:52px;display:block;margin-bottom:10px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:24px;color:#fff;font-weight:900;margin-bottom:4px;}
+.hero-badge{display:inline-block;background:rgba(225,29,72,.2);border:1px solid rgba(225,29,72,.5);color:#fda4af;border-radius:20px;padding:4px 14px;font-size:11px;font-weight:700;margin-top:6px;}
+
+.amount-card{margin:16px 12px;background:linear-gradient(135deg,#1a0008,#250010);border:2px solid rgba(225,29,72,.4);border-radius:16px;padding:20px;text-align:center;position:relative;overflow:hidden;}
+.amount-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#e11d48,transparent);}
+.amount-label{font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;font-weight:700;}
+.amount-value{font-family:'Playfair Display',serif;font-size:52px;font-weight:900;color:#fff;line-height:1;}
+.amount-currency{font-size:22px;color:#fda4af;vertical-align:super;font-weight:700;}
+.amount-mxn{font-size:14px;color:#fda4af;margin-top:4px;font-weight:600;}
+.amount-credits{font-size:13px;color:#64748b;margin-top:8px;}
+.amount-credits strong{color:#fbbf24;font-size:15px;}
+
+.timer-banner{margin:0 12px 14px;background:rgba(217,119,6,.08);border:1px solid rgba(217,119,6,.25);border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:8px;}
+.timer-icon{font-size:18px;}
+.timer-text{font-size:11px;color:#fcd34d;flex:1;line-height:1.5;}
+.timer-count{font-size:16px;font-weight:800;color:#fbbf24;white-space:nowrap;font-family:monospace;}
+
+.ref-section{margin:0 12px 14px;background:#0f0d1a;border:2px solid rgba(225,29,72,.3);border-radius:16px;overflow:hidden;}
+.ref-header{background:linear-gradient(135deg,rgba(225,29,72,.15),rgba(225,29,72,.05));padding:12px 16px;border-bottom:1px solid rgba(225,29,72,.2);display:flex;align-items:center;gap:8px;}
+.ref-header-icon{font-size:20px;}
+.ref-header-title{font-size:13px;font-weight:800;color:#fda4af;}
+.ref-header-sub{font-size:10px;color:#64748b;margin-top:1px;}
+.ref-body{padding:16px;}
+.ref-num-wrap{background:#fff;border-radius:10px;padding:14px 16px;margin-bottom:12px;text-align:center;}
+.ref-num{font-size:26px;font-weight:900;color:#111;letter-spacing:4px;font-family:monospace;line-height:1.2;}
+.ref-num-label{font-size:10px;color:#666;margin-top:4px;font-weight:600;text-transform:uppercase;letter-spacing:1px;}
+.barcode-wrap{background:#fff;border-radius:10px;padding:12px 8px 8px;margin-bottom:12px;text-align:center;}
+.barcode-svg{display:block;margin:0 auto;}
+.barcode-label{font-size:9px;color:#666;margin-top:6px;text-transform:uppercase;letter-spacing:1px;}
+.ref-copy-btn{width:100%;background:linear-gradient(135deg,#e11d48,#9f1239);border:none;color:#fff;border-radius:10px;padding:12px;font-size:13px;font-weight:800;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.5px;transition:all .2s;}
+.ref-copy-btn:active{transform:scale(.97)}
+.ref-note{font-size:10px;color:#64748b;text-align:center;margin-top:8px;line-height:1.6;}
+
+.steps-section{margin:0 12px 14px;}
+.steps-title{font-size:13px;font-weight:800;color:#fda4af;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.step-item{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px;background:#0f1520;border:1px solid #1e2a40;border-radius:12px;padding:12px;}
+.step-num{width:28px;height:28px;background:linear-gradient(135deg,#e11d48,#9f1239);border-radius:50%;color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-content{flex:1;}
+.step-title{font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:3px;}
+.step-desc{font-size:11px;color:#94a3b8;line-height:1.6;}
+.step-desc strong{color:#fda4af;}
+
+.notice{margin:0 12px 14px;background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.25);border-radius:12px;padding:14px;display:flex;gap:10px;}
+.notice-icon{font-size:20px;flex-shrink:0;}
+.notice-text{font-size:11px;color:#fcd34d;line-height:1.7;}
+.notice-text strong{color:#fbbf24;}
+
+/* CRÉDITO CONFIRMADO */
+.credit-confirm{margin:0 12px 14px;background:linear-gradient(135deg,rgba(16,185,129,.12),rgba(16,185,129,.04));border:2px solid rgba(16,185,129,.35);border-radius:14px;padding:16px;text-align:center;display:none;}
+.credit-confirm.show{display:block;}
+.credit-confirm-icon{font-size:40px;margin-bottom:8px;}
+.credit-confirm-title{font-family:'Playfair Display',serif;font-size:20px;color:#fff;font-weight:900;margin-bottom:4px;}
+.credit-confirm-sub{font-size:12px;color:#6ee7b7;margin-bottom:14px;}
+.credit-confirm-btn{display:inline-block;background:linear-gradient(135deg,#10b981,#059669);border:none;color:#fff;border-radius:10px;padding:11px 24px;font-size:13px;font-weight:800;cursor:pointer;text-decoration:none;font-family:'DM Sans',sans-serif;}
+
+.wa-section{margin:0 12px 14px;}
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:800;cursor:pointer;text-decoration:none;font-family:'DM Sans',sans-serif;letter-spacing:.3px;}
+.wa-note{font-size:11px;color:#64748b;text-align:center;margin-top:8px;line-height:1.6;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="topbar">
+  <a class="back-btn" href="index.html">← Volver</a>
+  <div>
+    <div class="topbar-title">🏪 Pago OXXO</div>
+    <div class="topbar-sub">Casino Solidario · Pago seguro</div>
+  </div>
+</div>
+
+<div class="hero">
+  <span class="oxxo-logo">🏪</span>
+  <h1>Paga en OXXO</h1>
+  <p style="font-size:12px;color:#94a3b8;margin-top:4px;">Usa la referencia o el código de barras en cualquier OXXO</p>
+  <span class="hero-badge">✅ Válido en toda la República · 24 horas</span>
+</div>
+
+<!-- MONTO DINÁMICO -->
+<div class="amount-card">
+  <div class="amount-label">Total a pagar</div>
+  <div class="amount-value"><span class="amount-currency">$</span><span id="disp-amount">—</span></div>
+  <div class="amount-mxn">Pesos Mexicanos (MXN)</div>
+  <div class="amount-credits">Recibirás <strong id="disp-credits">—</strong> créditos en tu Casino Solidario</div>
+</div>
+
+<div class="timer-banner">
+  <span class="timer-icon">⏱️</span>
+  <span class="timer-text">Esta referencia expira en:</span>
+  <span class="timer-count" id="timer">47:59</span>
+</div>
+
+<!-- REFERENCIA -->
+<div class="ref-section">
+  <div class="ref-header">
+    <span class="ref-header-icon">🔢</span>
+    <div>
+      <div class="ref-header-title">Referencia de pago OXXO</div>
+      <div class="ref-header-sub">Muestra este número al cajero</div>
+    </div>
+  </div>
+  <div class="ref-body">
+    <div class="ref-num-wrap">
+      <div class="ref-num" id="ref-number">—</div>
+      <div class="ref-num-label">Número de referencia · Casino Solidario</div>
+    </div>
+    <div class="barcode-wrap">
+      <svg class="barcode-svg" id="barcode-svg" width="280" height="70" viewBox="0 0 280 70" xmlns="http://www.w3.org/2000/svg"></svg>
+      <div class="barcode-label">Código de barras · Escanear en caja OXXO</div>
+    </div>
+    <button class="ref-copy-btn" onclick="copyRef()">📋 Copiar número de referencia</button>
+    <div class="ref-note">El cajero ingresa este número o escanea el código. Sin comisiones adicionales.</div>
+  </div>
+</div>
+
+<!-- INSTRUCCIONES -->
+<div class="steps-section">
+  <div class="steps-title">📋 Cómo pagar — Paso a paso</div>
+  <div class="step-item">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <div class="step-title">Ve a cualquier OXXO</div>
+      <div class="step-desc">Abiertos <strong>24 horas</strong>, los 365 días del año en toda la República.</div>
+    </div>
+  </div>
+  <div class="step-item">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <div class="step-title">Muestra la referencia al cajero</div>
+      <div class="step-desc">Di: <strong>"Quiero hacer un pago de servicio"</strong> y muéstrale el número o el código de barras.</div>
+    </div>
+  </div>
+  <div class="step-item">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <div class="step-title">Paga el monto exacto</div>
+      <div class="step-desc">Paga <strong id="step3-amount">—</strong> en efectivo. Guarda el comprobante que te entrega el cajero.</div>
+    </div>
+  </div>
+  <div class="step-item">
+    <div class="step-num">4</div>
+    <div class="step-content">
+      <div class="step-title">Envía comprobante por WhatsApp</div>
+      <div class="step-desc">Manda foto del ticket. Recibes tus <strong id="step4-credits">—</strong> en menos de 2 horas en horario de atención.</div>
+    </div>
+  </div>
+</div>
+
+<div class="notice" id="hold-notice" style="display:none;">
+  <span class="notice-icon">🔒</span>
+  <div class="notice-text">
+    <strong>Créditos retenidos hasta verificación:</strong> Tus créditos están guardados y serán liberados automáticamente en cuanto el bot de WhatsApp verifique tu comprobante de pago. ¡No pierdas tu ticket!
+  </div>
+</div>
+
+<div class="notice">
+  <span class="notice-icon">⚠️</span>
+  <div class="notice-text">
+    <strong>Importante:</strong> Los pagos OXXO se procesan manualmente. Envía tu comprobante por WhatsApp y recibirás tus créditos en máximo 2 horas (9am – 8pm). ¡Guarda bien tu ticket!
+  </div>
+</div>
+
+<!-- CONFIRMACIÓN DE CRÉDITOS (se muestra tras WhatsApp) -->
+<div class="credit-confirm" id="credit-confirm">
+  <div class="credit-confirm-icon">✅</div>
+  <div class="credit-confirm-title">¡Comprobante enviado!</div>
+  <div class="credit-confirm-sub">En cuanto verifiquemos tu pago, <strong id="confirm-credits">—</strong> serán añadidos a tu cuenta automáticamente.</div>
+  <a class="credit-confirm-btn" href="index.html">🎰 Volver al Casino</a>
+</div>
+
+<!-- WHATSAPP -->
+<div class="wa-section">
+  <a class="wa-btn" id="wa-confirm-btn" href="#" target="_blank" onclick="markSent()">
+    📱 Enviar comprobante por WhatsApp
+  </a>
+  <div class="wa-note">Recibes créditos en máximo 2h en horario de atención (9am–8pm).<br/>Bot activo 24/7 para consultas.</div>
+</div>
+
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const amount  = parseInt(params.get('amount')  || '50');
+const credits = parseInt(params.get('credits') || '1500');
+const holdMode = params.get('hold') === '1';
+const playerUID = params.get('uid') || '';
+const oxxoRef2 = params.get('ref') || '';
+
+// Si viene con hold=1, mostrar aviso de créditos retenidos
+if(holdMode){
+  const hb = document.getElementById('hold-notice');
+  if(hb) hb.style.display = 'flex';
+}
+
+// Fallback proporcional si no vienen créditos
+const RATE = 25;
+const creditDisplay = credits || amount * RATE;
+
+// Mostrar monto y créditos
+document.getElementById('disp-amount').textContent   = amount.toLocaleString('es-MX');
+document.getElementById('disp-credits').textContent  = creditDisplay.toLocaleString('es-MX') + ' créditos';
+document.getElementById('step3-amount').textContent  = '$' + amount.toLocaleString('es-MX') + ' MXN';
+document.getElementById('step4-credits').textContent = creditDisplay.toLocaleString('es-MX') + ' créditos';
+document.getElementById('confirm-credits').textContent = creditDisplay.toLocaleString('es-MX') + ' créditos';
+
+// Generar referencia única
+function genRef(){
+  const base = '71096900030107';
+  const suffix = ((amount * 13 + new Date().getDate() * 7 + new Date().getMonth() * 31) % 9000 + 1000).toString();
+  return base + suffix;
+}
+const refNum = genRef();
+document.getElementById('ref-number').textContent = refNum.replace(/(.{4})/g,'$1 ').trim();
+
+// Barcode SVG
+function generateBarcode(code, svgEl){
+  const widths = [];
+  for(let i=0;i<code.length;i++){
+    const c = code.charCodeAt(i);
+    widths.push(1+(c%3));
+    widths.push(1+((c*7)%2));
+  }
+  const all = [2,1,1,...widths,2,1,2];
+  const total = all.reduce((a,b)=>a+b,0);
+  const scale = 280/total;
+  let x=0, bars='';
+  all.forEach((w,i)=>{
+    const px = w*scale;
+    if(i%2===0) bars+=`<rect x="${x.toFixed(1)}" y="4" width="${px.toFixed(1)}" height="56" fill="#111"/>`;
+    x+=px;
+  });
+  svgEl.innerHTML = bars;
+}
+generateBarcode(refNum, document.getElementById('barcode-svg'));
+
+// WhatsApp link dinámico
+const waMsg = encodeURIComponent(
+  `Hola Casino Solidario! 🎰\nRealicé mi pago en OXXO:\n💰 Monto: $${amount.toLocaleString('es-MX')} MXN\n🪙 Créditos: ${creditDisplay.toLocaleString('es-MX')}\n🔢 Referencia: ${refNum.replace(/(.{4})/g,'$1 ').trim()}\n\nAdjunto mi comprobante de pago.`
+);
+document.getElementById('wa-confirm-btn').href = `https://wa.me/5215527238980?text=${waMsg}`;
+
+// Copiar referencia
+function copyRef(){
+  navigator.clipboard.writeText(refNum).then(()=>{
+    const btn = document.querySelector('.ref-copy-btn');
+    btn.textContent = '✅ ¡Referencia copiada!';
+    btn.style.background = 'linear-gradient(135deg,#10b981,#059669)';
+    setTimeout(()=>{
+      btn.textContent = '📋 Copiar número de referencia';
+      btn.style.background = '';
+    }, 2500);
+  });
+}
+
+// Mostrar confirmación cuando el usuario envía WhatsApp
+function markSent(){
+  setTimeout(()=>{
+    document.getElementById('credit-confirm').classList.add('show');
+  }, 800);
+}
+
+// Temporizador 48h
+let totalSecs = 47*3600+59*60+59;
+function updateTimer(){
+  const h = Math.floor(totalSecs/3600);
+  const m = Math.floor((totalSecs%3600)/60);
+  const s = totalSecs%60;
+  document.getElementById('timer').textContent =
+    String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  if(totalSecs>0) totalSecs--;
+}
+updateTimer();
+setInterval(updateTimer,1000);
+</script>
+</body>
+</html>
