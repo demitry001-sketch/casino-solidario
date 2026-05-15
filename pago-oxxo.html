@@ -166,6 +166,13 @@ body{font-family:'DM Sans',sans-serif;background:#0b0d14;color:#e2e8f0;min-heigh
   </div>
 </div>
 
+<div class="notice" id="hold-notice" style="display:none;">
+  <span class="notice-icon">🔒</span>
+  <div class="notice-text">
+    <strong>Créditos retenidos hasta verificación:</strong> Tus créditos están guardados y serán liberados automáticamente en cuanto el bot de WhatsApp verifique tu comprobante de pago. ¡No pierdas tu ticket!
+  </div>
+</div>
+
 <div class="notice">
   <span class="notice-icon">⚠️</span>
   <div class="notice-text">
@@ -195,6 +202,15 @@ body{font-family:'DM Sans',sans-serif;background:#0b0d14;color:#e2e8f0;min-heigh
 const params = new URLSearchParams(window.location.search);
 const amount  = parseInt(params.get('amount')  || '50');
 const credits = parseInt(params.get('credits') || '1500');
+const holdMode = params.get('hold') === '1';
+const playerUID = params.get('uid') || '';
+const oxxoRef2 = params.get('ref') || '';
+
+// Si viene con hold=1, mostrar aviso de créditos retenidos
+if(holdMode){
+  const hb = document.getElementById('hold-notice');
+  if(hb) hb.style.display = 'flex';
+}
 
 // Fallback proporcional si no vienen créditos
 const RATE = 25;
