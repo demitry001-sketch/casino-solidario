@@ -7,14 +7,14 @@
 <meta name="description" content="Casino Solidario - Juega gratis y apoya a comunidades reales"/>
 <meta property="og:title" content="🎰 Casino Solidario - Juega y Dona"/>
 <meta property="og:description" content="¡Juega gratis slots, ruleta, blackjack y dados! Dona lo que puedas para apoyar comunidades reales. ¡Lo mejor de dos mundos! 💛✨"/>
-<meta property="og:image" content="https://sparkly-kulfi-6e8d54.netlify.app/og-preview.png"/>
-<meta property="og:url" content="https://sparkly-kulfi-6e8d54.netlify.app/"/>
+<meta property="og:image" content="https://casino-solidario.vercel.app/og-preview.png"/>
+<meta property="og:url" content="https://casino-solidario.vercel.app/"/>
 <meta property="og:type" content="website"/>
-<meta property="og:site_name" content="Casino Solidario de Adrian"/>
+<meta property="og:site_name" content="Casino Solidario"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="🎰 Casino Solidario - Juega y Dona"/>
 <meta name="twitter:description" content="¡Juega gratis y apoya causas reales! 💛"/>
-<meta name="twitter:image" content="https://sparkly-kulfi-6e8d54.netlify.app/og-preview.png"/>
+<meta name="twitter:image" content="https://casino-solidario.vercel.app/og-preview.png"/>
 <title>🎰 Casino Solidario | Apoyo Comunitario</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -452,6 +452,69 @@ body.bg-ocean::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;ba
 .c-coin{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--coin-gold);animation:coinBurst 0.8s ease-out forwards;}
 @keyframes coinBurst{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}}
 
+/* ── MODAL DE BIENVENIDA / REGISTRO ── */
+.welcome-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:2000;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(6px);}
+.welcome-overlay.hidden{display:none;}
+.welcome-sheet{background:linear-gradient(160deg,#0f1a2e,#111827);border:1px solid rgba(217,119,6,.4);border-radius:24px 24px 0 0;padding:28px 20px 36px;width:100%;max-width:480px;position:relative;overflow:hidden;animation:slideUp .35s ease;}
+.welcome-sheet::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--copper-light),transparent);}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.welcome-chip{font-size:48px;text-align:center;display:block;margin-bottom:10px;animation:chipBounce 1s ease infinite alternate;}
+@keyframes chipBounce{from{transform:scale(1)}to{transform:scale(1.08)}}
+.welcome-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:#fff;text-align:center;margin-bottom:4px;}
+.welcome-sub{font-size:13px;color:var(--text-muted);text-align:center;margin-bottom:6px;line-height:1.6;}
+.welcome-bonus-badge{background:linear-gradient(135deg,rgba(217,119,6,.25),rgba(217,119,6,.1));border:1.5px solid var(--copper-light);border-radius:12px;padding:12px 16px;margin:12px 0;text-align:center;}
+.welcome-bonus-badge .bonus-num{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--copper-light);display:block;line-height:1;}
+.welcome-bonus-badge .bonus-label{font-size:11px;color:var(--copper);font-weight:700;letter-spacing:.5px;}
+.welcome-input{width:100%;background:rgba(255,255,255,.07);border:1.5px solid rgba(217,119,6,.35);border-radius:10px;padding:13px 14px;font-size:15px;color:#fff;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:8px;transition:.2s;}
+.welcome-input:focus{border-color:var(--copper-light);background:rgba(217,119,6,.08);}
+.welcome-input::placeholder{color:var(--text-dim);}
+.welcome-cta{width:100%;background:linear-gradient(135deg,#d97706,#92400e);border:none;color:#fff;border-radius:12px;padding:15px;font-size:16px;font-weight:900;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.5px;margin-top:4px;box-shadow:0 6px 24px rgba(217,119,6,.4);transition:.15s;position:relative;overflow:hidden;}
+.welcome-cta::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.1),transparent);}
+.welcome-cta:active{transform:scale(.97)}
+.welcome-trust{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px;}
+.welcome-trust span{font-size:10px;color:var(--text-dim);display:flex;align-items:center;gap:3px;}
+.welcome-skip{display:block;text-align:center;font-size:11px;color:var(--text-dim);margin-top:12px;cursor:pointer;text-decoration:underline;}
+
+/* ── BANNER USUARIO LOGUEADO ── */
+.user-banner{background:linear-gradient(135deg,rgba(217,119,6,.12),rgba(217,119,6,.04));border-bottom:1px solid rgba(217,119,6,.2);padding:8px 16px;display:flex;align-items:center;justify-content:space-between;}
+.user-banner.hidden{display:none;}
+.user-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--copper),#b45309);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;flex-shrink:0;}
+.user-info{flex:1;margin:0 10px;}
+.user-name-banner{font-size:12px;font-weight:800;color:var(--copper-light);}
+.user-credits-banner{font-size:10px;color:var(--text-muted);}
+.user-recharge-btn{background:linear-gradient(135deg,#d97706,#92400e);border:none;color:#fff;border-radius:16px;padding:5px 12px;font-size:11px;font-weight:800;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;}
+
+/* ── POP-UP CRÉDITOS VACÍOS ── */
+.empty-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:1900;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);}
+.empty-overlay.hidden{display:none;}
+.empty-card{background:linear-gradient(160deg,#0f1a2e,#111827);border:2px solid rgba(217,119,6,.5);border-radius:20px;padding:24px 20px;width:100%;max-width:360px;text-align:center;animation:popIn .3s ease;}
+@keyframes popIn{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+.empty-icon{font-size:52px;display:block;margin-bottom:10px;}
+.empty-title{font-family:'Playfair Display',serif;font-size:22px;color:#fff;font-weight:900;margin-bottom:6px;}
+.empty-sub{font-size:12px;color:var(--text-muted);margin-bottom:16px;line-height:1.6;}
+.empty-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.empty-opt{border-radius:12px;padding:12px 8px;cursor:pointer;border:1.5px solid;text-align:center;transition:.2s;}
+.empty-opt:active{transform:scale(.96);}
+.empty-opt .eo-icon{font-size:24px;display:block;margin-bottom:4px;}
+.empty-opt .eo-label{font-size:12px;font-weight:800;}
+.empty-opt .eo-sub{font-size:10px;margin-top:2px;}
+.empty-close{font-size:11px;color:var(--text-dim);cursor:pointer;text-decoration:underline;display:block;margin-top:6px;}
+
+/* ── BONO URGENTE COUNTDOWN ── */
+.urgency-banner{background:linear-gradient(135deg,rgba(225,29,72,.15),rgba(225,29,72,.05));border:1px solid rgba(225,29,72,.35);border-radius:12px;padding:10px 14px;margin:0 12px 12px;display:flex;align-items:center;gap:10px;}
+.urgency-banner.hidden{display:none;}
+.urg-icon{font-size:22px;flex-shrink:0;}
+.urg-text{flex:1;}
+.urg-title{font-size:12px;font-weight:800;color:#fda4af;}
+.urg-sub{font-size:10px;color:var(--text-muted);margin-top:1px;}
+.urg-timer{font-size:18px;font-weight:900;color:#fda4af;font-family:monospace;white-space:nowrap;}
+.urg-btn{background:linear-gradient(135deg,#e11d48,#9f1239);border:none;color:#fff;border-radius:20px;padding:6px 12px;font-size:11px;font-weight:800;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;flex-shrink:0;}
+
+/* ── BADGE DE CONFIANZA ── */
+.trust-bar{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:0 12px;margin-bottom:12px;}
+.trust-bar::-webkit-scrollbar{display:none;}
+.trust-chip{flex-shrink:0;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:20px;padding:5px 10px;font-size:10px;color:var(--emerald-light);font-weight:700;display:flex;align-items:center;gap:4px;white-space:nowrap;}
+
 @media(max-width:360px){
   .logo-text{font-size:16px}.reel{font-size:30px}
   .die-3d-wrap{width:64px;height:64px}.die-3d,.face{width:64px;height:64px}
@@ -462,6 +525,60 @@ body.bg-ocean::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;ba
 </style>
 </head>
 <body class="bg-default">
+
+<!-- ══════ MODAL BIENVENIDA / REGISTRO ══════ -->
+<div class="welcome-overlay" id="welcome-overlay">
+  <div class="welcome-sheet">
+    <span class="welcome-chip">🎰</span>
+    <div class="welcome-title">¡Bienvenido al Casino!</div>
+    <div class="welcome-sub">Ingresa tu nombre y recibe <strong style="color:var(--copper-light);">500 créditos gratis</strong> para empezar a jugar ahora mismo.</div>
+    <div class="welcome-bonus-badge">
+      <span class="bonus-num">🪙 500</span>
+      <span class="bonus-label">CRÉDITOS DE BIENVENIDA GRATIS</span>
+    </div>
+    <input class="welcome-input" id="welcome-name" type="text" placeholder="¿Cómo te llamas?" maxlength="20" autocomplete="off"/>
+    <button class="welcome-cta" onclick="doRegister()">🎲 ¡Reclamar mis créditos y jugar!</button>
+    <div class="welcome-trust">
+      <span>✅ Sin tarjeta</span>
+      <span>🔒 100% seguro</span>
+      <span>⚡ Instantáneo</span>
+      <span>🎁 Gratis de verdad</span>
+    </div>
+    <span class="welcome-skip" onclick="skipRegister()">Continuar sin registrarme →</span>
+  </div>
+</div>
+
+<!-- ══════ POP-UP CRÉDITOS VACÍOS ══════ -->
+<div class="empty-overlay hidden" id="empty-overlay">
+  <div class="empty-card">
+    <span class="empty-icon">😅</span>
+    <div class="empty-title">¡Se acabaron los créditos!</div>
+    <div class="empty-sub">Recarga ahora y sigue jugando. Cada peso apoya a comunidades reales 💛</div>
+    <div class="empty-options">
+      <div class="empty-opt" style="border-color:rgba(225,29,72,.5);background:rgba(225,29,72,.08);" onclick="closeEmpty();openPayWith('oxxo')">
+        <span class="eo-icon">🏪</span>
+        <div class="eo-label" style="color:#fda4af;">OXXO</div>
+        <div class="eo-sub" style="color:var(--text-dim);">Efectivo 24h</div>
+      </div>
+      <div class="empty-opt" style="border-color:rgba(59,130,246,.5);background:rgba(59,130,246,.08);" onclick="closeEmpty();openPayWith('bitso')">
+        <span class="eo-icon">₿</span>
+        <div class="eo-label" style="color:#93c5fd;">Bitso</div>
+        <div class="eo-sub" style="color:var(--text-dim);">Cripto / MXN</div>
+      </div>
+      <div class="empty-opt" style="border-color:rgba(99,102,241,.5);background:rgba(99,102,241,.08);" onclick="closeEmpty();openPayWith('card')">
+        <span class="eo-icon">💳</span>
+        <div class="eo-label" style="color:#a5b4fc;">Tarjeta</div>
+        <div class="eo-sub" style="color:var(--text-dim);">Débito/Crédito</div>
+      </div>
+      <div class="empty-opt" style="border-color:rgba(37,211,102,.5);background:rgba(37,211,102,.08);" onclick="closeEmpty();window.open('https://wa.me/5215527238980?text=Hola!+quiero+recargar+créditos','_blank')">
+        <span class="eo-icon">📱</span>
+        <div class="eo-label" style="color:#6ee7b7;">WhatsApp</div>
+        <div class="eo-sub" style="color:var(--text-dim);">Asesor en vivo</div>
+      </div>
+    </div>
+    <span class="empty-close" onclick="closeEmpty()">Ahora no, seguir viendo</span>
+  </div>
+</div>
 
 <!-- ══ AUDIO CON AUTOPLAY + BARRA DE CONTROL ══ -->
 <audio id="casino-audio" loop preload="auto">
@@ -640,7 +757,36 @@ body.bg-ocean::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;ba
   </div>
 </div>
 
-<!-- SUBMENÚ -->
+<!-- BANNER USUARIO -->
+<div class="user-banner hidden" id="user-banner">
+  <div class="user-avatar" id="user-avatar-letter">?</div>
+  <div class="user-info">
+    <div class="user-name-banner" id="user-name-display">—</div>
+    <div class="user-credits-banner">💰 <span data-cs="credits">0</span> créditos disponibles</div>
+  </div>
+  <button class="user-recharge-btn" onclick="openPay()">+ Recargar</button>
+</div>
+
+<!-- BARRA DE CONFIANZA -->
+<div class="trust-bar" id="trust-bar">
+  <div class="trust-chip">✅ Pagos verificados</div>
+  <div class="trust-chip">🔒 Datos seguros</div>
+  <div class="trust-chip">⚡ Créditos instantáneos</div>
+  <div class="trust-chip">💛 Proyecto solidario</div>
+  <div class="trust-chip">🇲🇽 Hecho en México</div>
+  <div class="trust-chip">📱 OXXO · Bitso · Tarjeta</div>
+</div>
+
+<!-- BONO URGENTE -->
+<div class="urgency-banner hidden" id="urgency-banner">
+  <span class="urg-icon">🔥</span>
+  <div class="urg-text">
+    <div class="urg-title">¡Bono del día activo! +50% créditos extra</div>
+    <div class="urg-sub">Solo por hoy · Termina en</div>
+  </div>
+  <span class="urg-timer" id="urg-timer">—</span>
+  <button class="urg-btn" onclick="openPay()">¡Aprovechar!</button>
+</div>
 <div class="subnav">
   <div class="subnav-inner">
     <button class="subnav-item active" id="snav-principal" onclick="showSubnav('principal',this)">🏠 Inicio</button>
@@ -2793,6 +2939,139 @@ window.addEventListener('DOMContentLoaded', function(){
   } else {
     initAll();
   }
+})();
+
+/* ══════════════════════════════════════
+   SISTEMA DE REGISTRO + MONETIZACIÓN
+══════════════════════════════════════ */
+(function(){
+
+  /* ── Estado de usuario ── */
+  let currentUser = null;
+  try { currentUser = JSON.parse(localStorage.getItem('cs_user') || 'null'); } catch(e){}
+
+  function saveUser(u){ currentUser = u; localStorage.setItem('cs_user', JSON.stringify(u)); }
+
+  /* ── Mostrar / ocultar modal de bienvenida ── */
+  function showWelcome(){
+    const ov = document.getElementById('welcome-overlay');
+    if(ov) ov.classList.remove('hidden');
+    // Enter en input
+    const inp = document.getElementById('welcome-name');
+    if(inp) inp.addEventListener('keydown', e=>{ if(e.key==='Enter') doRegister(); });
+  }
+
+  window.doRegister = function(){
+    const inp = document.getElementById('welcome-name');
+    const name = (inp ? inp.value.trim() : '') || 'Jugador';
+    const user = { name, ts: Date.now(), firstVisit: true };
+    saveUser(user);
+    // Dar créditos de bienvenida si no los tiene
+    const cur = parseInt(localStorage.getItem('cs_credits')||'0');
+    if(cur < 500){
+      localStorage.setItem('cs_credits','500');
+      document.dispatchEvent(new CustomEvent('cs:credits-updated',{detail:{credits:500},bubbles:true}));
+    }
+    closeWelcome();
+    updateUserBanner();
+    showUrgencyBanner();
+    if(window.coinBurst) window.coinBurst();
+    if(window.showToast) window.showToast('🎉 ¡Bienvenido, '+name+'! +500 créditos gratis 🪙', true);
+    // Registrar en el live feed
+    if(window.CasinoBot){ /* ya existe el addActivity */ }
+    try{
+      const regs = JSON.parse(localStorage.getItem('live_regs')||'[]');
+      const alr = regs.find(r=>r.id===localStorage.getItem('cs_uid'));
+      if(!alr){
+        const uid = Date.now().toString(36);
+        localStorage.setItem('cs_uid', uid);
+        regs.push({id:uid, name, ts:Date.now()});
+        localStorage.setItem('live_regs', JSON.stringify(regs.slice(-30)));
+      }
+    }catch(e){}
+  };
+
+  window.skipRegister = function(){
+    closeWelcome();
+    showUrgencyBanner();
+  };
+
+  function closeWelcome(){
+    const ov = document.getElementById('welcome-overlay');
+    if(ov) ov.classList.add('hidden');
+  }
+
+  /* ── Banner de usuario ── */
+  function updateUserBanner(){
+    const banner = document.getElementById('user-banner');
+    if(!banner) return;
+    if(!currentUser){ banner.classList.add('hidden'); return; }
+    banner.classList.remove('hidden');
+    const nameEl = document.getElementById('user-name-display');
+    const avatarEl = document.getElementById('user-avatar-letter');
+    if(nameEl) nameEl.textContent = '¡Hola, ' + currentUser.name + '! 👋';
+    if(avatarEl) avatarEl.textContent = currentUser.name.charAt(0).toUpperCase();
+    // Sincronizar créditos en el banner
+    document.addEventListener('cs:credits-updated', e=>{
+      const credSpans = banner.querySelectorAll('[data-cs="credits"]');
+      credSpans.forEach(s=>s.textContent=(e.detail.credits||0).toLocaleString('es-MX'));
+    });
+  }
+
+  /* ── Bono urgente countdown (hasta medianoche) ── */
+  function showUrgencyBanner(){
+    const banner = document.getElementById('urgency-banner');
+    if(!banner) return;
+    banner.classList.remove('hidden');
+    function tick(){
+      const now = new Date();
+      const midnight = new Date(now); midnight.setHours(23,59,59,999);
+      const diff = Math.max(0, midnight - now);
+      const h = Math.floor(diff/3600000);
+      const m = Math.floor((diff%3600000)/60000);
+      const s = Math.floor((diff%60000)/1000);
+      const el = document.getElementById('urg-timer');
+      if(el) el.textContent = String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+      if(diff>0) setTimeout(tick,1000);
+    }
+    tick();
+  }
+
+  /* ── Pop-up créditos vacíos ── */
+  window.closeEmpty = function(){
+    const ov = document.getElementById('empty-overlay');
+    if(ov) ov.classList.add('hidden');
+  };
+
+  function showEmpty(){
+    const ov = document.getElementById('empty-overlay');
+    if(ov) ov.classList.remove('hidden');
+  }
+
+  // Interceptar cuando créditos llegan a 0
+  document.addEventListener('cs:credits-updated', e=>{
+    if(e.detail.credits === 0){
+      setTimeout(showEmpty, 800);
+    }
+  });
+
+  /* ── Inicialización al cargar ── */
+  function init(){
+    if(!currentUser){
+      // Primera visita → mostrar bienvenida después de 400ms
+      setTimeout(showWelcome, 400);
+    } else {
+      updateUserBanner();
+      showUrgencyBanner();
+    }
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
 })();
 </script>
 </body>
