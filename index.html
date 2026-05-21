@@ -1506,6 +1506,39 @@ let selectedPayMethod = null;
 let selectedPayAmt = null;
 let selectedPayCredits = null;
 
+// ══════════════════════════════════════════════════════════
+// 💾 SOLCOIN SHARED BALANCE — Sincronización entre los 3 juegos
+// casino-solidario | solcoin-v7 | Ciudades-3D
+// solCoins del casino = gameState.wallet en solcoin-v7 (1:1)
+// ══════════════════════════════════════════════════════════
+const SOL_KEY   = 'solcoin_wallet';
+const BITSO_KEY = 'solcoin_bitso';
+
+function saveBalance() {
+  localStorage.setItem(SOL_KEY, solCoins);
+  console.log('💾 Balance guardado:', solCoins, 'SolCoins / SOL');
+}
+
+function loadBalance() {
+  const saved = localStorage.getItem(SOL_KEY);
+  if (saved !== null) {
+    solCoins = parseFloat(saved) || 0;
+    creditsWagered = solCoins * 10000; // reconstruir wagered para que el progreso sea consistente
+    console.log('💾 Balance cargado:', solCoins, 'SolCoins desde otros juegos');
+  }
+}
+
+// Escuchar cambios en tiempo real desde otro juego abierto en otra pestaña
+window.addEventListener('storage', (e) => {
+  if (e.key === SOL_KEY) {
+    solCoins = parseFloat(e.newValue) || 0;
+    creditsWagered = solCoins * 10000;
+    updateCoinDisplay();
+    showToast('🔄 Balance sincronizado: ' + fmt(solCoins) + ' SolCoins');
+    console.log('🔄 Sincronizado desde otro juego:', solCoins, 'SolCoins');
+  }
+});
+
 const $ = id => document.getElementById(id);
 const fmt = n => n.toLocaleString('es-MX');
 function upd(){ $('bal').textContent = fmt(bal) }
@@ -1839,6 +1872,7 @@ function updateCoinDisplay(){
     wBtn.style.borderColor = canWithdraw ? 'rgba(16,185,129,.6)' : '';
     wBtn.style.color = canWithdraw ? 'var(--emerald-light)' : '';
   }
+  saveBalance(); // 💾 Sincroniza SolCoins con los otros juegos
 }
 function withdrawCoins(){
   const WA_NUM = '521' + '55' + '27238980';
@@ -2643,6 +2677,8 @@ function newScratchGame(){
 
 /* ─── INIT ON LOAD ─── */
 window.addEventListener('DOMContentLoaded', function(){
+  loadBalance();       // 💾 Carga el balance compartido entre los 3 juegos
+  updateCoinDisplay(); // Refresca la UI con el balance cargado
   initLoteriaGame();
 });
 </script>
